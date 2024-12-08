@@ -13,10 +13,12 @@ export default function SearchForm({ query }: { query?: string }) {
         className="search-input"
         placeholder="Search Startups"
       />
-      <div className="flex gap-2">{query && <SearchFormReset />}</div>
-      <Button className="search-btn text-white">
-        <Search className="size-5" />
-      </Button>
+      <div className="flex gap-2">
+        {query && <SearchFormReset />}
+        <Button className="search-btn text-white">
+          <Search className="size-5" />
+        </Button>
+      </div>
     </Form>
   )
 }

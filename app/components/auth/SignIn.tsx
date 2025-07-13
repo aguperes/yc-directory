@@ -1,14 +1,16 @@
-import { signIn } from "@/auth"
+import { signIn } from "@/auth";
 
 export function SignIn() {
   return (
     <form
       action={async () => {
-        "use server"
-        await signIn("github")
+        "use server";
+        await signIn("github");
       }}
     >
-      <button className="cursor-pointer" type="submit">Login</button>
+      <button className="cursor-pointer" type="submit">
+        Login
+      </button>
     </form>
-  )
+  );
 }

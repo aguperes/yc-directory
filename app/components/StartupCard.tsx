@@ -3,20 +3,9 @@ import { EyeIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import { Startup, Author } from "@/sanity/types";
 
-export type StartupCardType = {
-  _createdAt: string;
-  views: number;
-  author: {
-    _id: number;
-    name: string;
-  };
-  _id: number;
-  description: string;
-  image: string;
-  category: string;
-  title: string;
-};
+export type StartupCardType = Omit<Startup, "author"> & { author?: Author };
 
 export default function StartupCard({ post }: { post: StartupCardType }) {
   const {
@@ -29,6 +18,7 @@ export default function StartupCard({ post }: { post: StartupCardType }) {
     image,
     description,
   } = post;
+
   return (
     <li className="bg-white border-[5px] border-black py-6 px-5 rounded-[22px] shadow-200 hover:border-primary transition-all duration-500 hover:shadow-300 hover:bg-primary-100">
       <div className="flex justify-between items-center">
@@ -44,9 +34,9 @@ export default function StartupCard({ post }: { post: StartupCardType }) {
 
       <div className="flex justify-between mt-5 gap-5">
         <div className="flex-1">
-          <Link href={`/user/${author._id}`}>
+          <Link href={`/user/${author?._id}`}>
             <p className="text-[16px] font-medium line-clamp-1">
-              {author.name}
+              {author?.name}
             </p>
           </Link>
 
@@ -55,7 +45,7 @@ export default function StartupCard({ post }: { post: StartupCardType }) {
           </Link>
         </div>
 
-        <Link href={`/user/${author._id}`}>
+        <Link href={`/user/${author?._id}`}>
           <Image
             src="https://placehold.co/48x48"
             alt="placeholder"
@@ -79,7 +69,7 @@ export default function StartupCard({ post }: { post: StartupCardType }) {
       </Link>
 
       <div className="flex justify-between gap-3 mt-5">
-        <Link href={`/?query=${category.toLocaleLowerCase()}`}>
+        <Link href={`/?query=${category?.toLocaleLowerCase()}`}>
           <p className="text-[16px] font-medium">{category}</p>
         </Link>
         <Button

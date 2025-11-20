@@ -9,14 +9,13 @@ type SearchParamsType = {
 
 export default async function Home({ searchParams }: SearchParamsType) {
   const { query } = await searchParams;
+  const params = { search: query || null };
 
-  const posts = await client.fetch(STARTUPS_QUERY);
-
-  console.log(posts);
+  const posts = await client.fetch(STARTUPS_QUERY, params);
 
   return (
     <>
-      <section className="w-full bg-primary min-h-[530px] pattern flex justify-center items-center flex-col py-10 px-6;">
+      <section className="pink_container">
         <h1 className="text-3xl uppercase bg-black px-6 pt-3 text-white font-work-sans font-extrabold sm:[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5">
           Pitch your startup
           <br /> Connect with entrepreneurs

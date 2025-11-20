@@ -17,7 +17,7 @@ export default function SearchForm({ query }: Params) {
     >
       <input
         name="query"
-        defaultValue=""
+        defaultValue={query}
         className="flex-1 font-bold placeholder:font-semibold placeholder:text-black-100 w-full h-auto outline-none"
         placeholder="Search Startups"
       />

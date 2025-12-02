@@ -1,13 +1,8 @@
-import { signIn } from "@/auth";
+import { signInAction } from "@/app/components/auth/actions";
 
 export function SignIn() {
   return (
-    <form
-      action={async () => {
-        "use server";
-        await signIn("github");
-      }}
-    >
+    <form action={signInAction}>
       <button className="cursor-pointer" type="submit">
         Login
       </button>

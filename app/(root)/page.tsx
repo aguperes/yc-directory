@@ -2,6 +2,7 @@ import { client } from "@/sanity/lib/client";
 import SearchForm from "../components/SearchForm";
 import StartupCard, { StartupCardType } from "../components/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
+import { auth } from "@/auth";
 
 type SearchParamsType = {
   searchParams: Promise<{ query: string | undefined }>;
@@ -10,6 +11,9 @@ type SearchParamsType = {
 export default async function Home({ searchParams }: SearchParamsType) {
   const { query } = await searchParams;
   const params = { search: query || null };
+
+  const session = await auth();
+  console.log(session?.id);
 
   const posts = await client.fetch(STARTUPS_QUERY, params);
 

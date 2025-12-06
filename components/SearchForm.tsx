@@ -1,4 +1,4 @@
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 import { SearchIcon } from "lucide-react";
 import Form from "next/form";
 import SearchFormReset from "./SearchFormReset";

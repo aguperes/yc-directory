@@ -33,7 +33,7 @@ export default async function Page({ params }: Params) {
         <img
           src={post.image}
           alt="thumbnail"
-          className="w-full w-64 h-48 rounded-xl object-cover"
+          className="w-64 h-48 rounded-xl object-cover"
         />
 
         <div className="space-y-5 mt-10 mx-w-4xl mx-auto">

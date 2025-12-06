@@ -1,4 +1,4 @@
-import { signInAction } from "@/app/components/auth/actions";
+import { signInAction } from "@/components/auth/actions";
 
 export function SignIn() {
   return (

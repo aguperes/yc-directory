@@ -1,6 +1,6 @@
 import { client } from "@/sanity/lib/client";
-import SearchForm from "../components/SearchForm";
-import StartupCard, { StartupCardType } from "../components/StartupCard";
+import SearchForm from "@/components/SearchForm";
+import StartupCard, { StartupCardType } from "@/components/StartupCard";
 import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { auth } from "@/auth";
 

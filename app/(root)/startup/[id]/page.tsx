@@ -26,7 +26,7 @@ export default async function Page({ params }: Params) {
       <section className="pink_container min-h-[230px]">
         <p className="tag">{formatDate(post?._createdAt)}</p>
         <h1 className="heading">{post.title}</h1>
-        <p className="sub-heading max-w-4 xl">{post.description}</p>
+        <p className="sub-heading max-w-4xl">{post.description}</p>
       </section>
 
       <section className="section_container">

@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin "@tailwindcss/typography";
 
 @theme {
   --xs: 475;
@@ -53,7 +54,7 @@
 }
 
 @utility section_container {
-  @apply px-6 py-10 max-w-7xl mx-auto;
+  @apply px-6 py-10 max-w-4xl mx-auto;
 }
 
 @utility tag {

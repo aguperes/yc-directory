@@ -12,20 +12,17 @@ export default async function Home({ searchParams }: SearchParamsType) {
   const { query } = await searchParams;
   const params = { search: query || null };
 
-  const session = await auth();
-  console.log(session?.id);
-
   const posts = await client.fetch(STARTUPS_QUERY, params);
 
   return (
     <>
       <section className="pink_container">
-        <h1 className="text-3xl uppercase bg-black px-6 pt-3 text-white font-work-sans font-extrabold sm:[54px] sm:leading-[64px] text-[36px] leading-[46px] max-w-5xl text-center my-5">
+        <h1 className="heading">
           Pitch your startup
           <br /> Connect with entrepreneurs
         </h1>
 
-        <p className="font-medium text-[20px] text-white max-w-2xl text-center break-words">
+        <p className="sub-heading">
           Submit Ideas, Vote on Pitches, and Get Noticed in Virtual
           Competitions.
         </p>

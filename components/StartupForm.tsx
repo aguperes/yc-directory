@@ -1,20 +1,22 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
-import { Send } from "lucide-react";
 import { useState, useActionState } from "react";
-import MDEditor from "@uiw/react-md-editor";
-import { formSchema } from "@/lib/validation";
-import { z } from "zod";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { z } from "zod";
+import { formSchema } from "@/lib/validation";
+import { createPitchAction } from "@/lib/actions";
+
+import MDEditor from "@uiw/react-md-editor";
+import { toast } from "sonner";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { Send } from "lucide-react";
 
 export default function StartupForm() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pitch, setPitch] = useState("");
-  const { router } = useRouter;
+  const router = useRouter();
 
   const handleFormSubmit = async (prevState: any, formData: FormData) => {
     try {
@@ -28,18 +30,16 @@ export default function StartupForm() {
 
       await formSchema.parseAsync(formValues);
 
-      console.log(formValues);
+      const result = await createPitchAction(prevState, formData, pitch);
 
-      // const result = await createIdea(prevState, formData, pitch);
-      // console.log(result);
-      // if (result.status === "SUCCESS") {
-      //   toast.success("Success", {
-      //     description: "Your startup pitch has been created successfully",
-      //   });
+      if (result.status === "SUCCESS") {
+        toast.success("Success", {
+          description: "Your startup pitch has been created successfully",
+        });
 
-      //   router.push(`/startup/${result.id}`);
-      // }
-      // return result;
+        router.push(`/startup/${result._id}`);
+      }
+      return result;
     } catch (error) {
       if (error instanceof z.ZodError) {
         const fieldErrors = error.flatten().fieldErrors;
@@ -65,10 +65,12 @@ export default function StartupForm() {
     }
   };
 
-  const [state, formAction, isPending] = useActionState(handleFormSubmit, {
+  const [formState, formAction, isPending] = useActionState(handleFormSubmit, {
     error: "",
     status: "INITIAL",
   });
+
+  console.log(formState);
 
   return (
     <form
@@ -87,8 +89,7 @@ export default function StartupForm() {
           name="title"
           className="border-[3px] border-black px-5 py-7 text-[18px] text-black font-semibold rounded-full mt-3 placeholder:text-black-300"
           required
-          placeholder="Startup
-        Title"
+          placeholder="Startup Title"
         />
         {errors.title && (
           <p className="text-red-500 mt-2 ml-5">{errors.title}</p>

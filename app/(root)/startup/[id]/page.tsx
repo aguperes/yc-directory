@@ -26,14 +26,14 @@ export default async function Page({ params }: Params) {
       <section className="pink_container min-h-[230px]">
         <p className="tag">{formatDate(post?._createdAt)}</p>
         <h1 className="heading">{post.title}</h1>
-        <p className="sub-heading max-w-5xl">{post.description}</p>
+        <p className="sub-heading max-w-4 xl">{post.description}</p>
       </section>
 
       <section className="section_container">
         <img
           src={post.image}
           alt="thumbnail"
-          className="w-64 h-48 rounded-xl object-cover"
+          className="w-full h-auto rounded-xl"
         />
 
         <div className="space-y-5 mt-10 mx-w-4xl mx-auto">
@@ -58,12 +58,15 @@ export default async function Page({ params }: Params) {
                 </p>
               </div>
             </Link>
+
             <p className="category-tag">{post.category}</p>
           </div>
+
           <h3 className="text-[30px] font-bold text-black">Pitch Details</h3>
+
           {parsedContent ? (
             <article
-              className="prose max-w-4xl break-all font-sans"
+              className="prose max-w-4xl font-sans"
               dangerouslySetInnerHTML={{ __html: parsedContent }}
             />
           ) : (

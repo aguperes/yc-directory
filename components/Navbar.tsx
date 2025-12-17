@@ -3,6 +3,9 @@ import Image from "next/image";
 import { auth } from "@/auth";
 import { SignOut } from "./auth/SignOut";
 import { SignIn } from "./auth/SignIn";
+import { BadgePlus } from "lucide-react";
+import { Avatar } from "./ui/avatar";
+import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
 
 export default async function Navbar() {
   const session = await auth();
@@ -17,13 +20,20 @@ export default async function Navbar() {
           {session && session.user ? (
             <>
               <Link href="/startup/create">
-                <span>Create</span>
+                <span className="max-sm:hidden">Create</span>
+                <BadgePlus className="size-6 sm:hidden" />
               </Link>
 
               <SignOut />
 
               <Link href={`/user/${session.id}`}>
-                <span>{session.user.name}</span>
+                <Avatar className="size-10">
+                  <AvatarImage
+                    src={session?.user.image || ""}
+                    alt={session?.user?.name || ""}
+                  />
+                  <AvatarFallback>AV</AvatarFallback>
+                </Avatar>
               </Link>
             </>
           ) : (
